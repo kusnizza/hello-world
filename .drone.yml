@@ -1,9 +1,44 @@
 kind: pipeline
-name: default
+name: frontend
+group: first
 
 steps:
-- name: frontend
+- name: build
   image: node
   commands:
   - npm install
-  - npm run test:unit
+  - npm test
+  
+---  
+kind: pipeline
+name: iOS
+group: first
+
+steps:
+- name: build
+  image: node
+  commands:
+  - npm install
+  - npm test  
+  
+steps:
+- name: test
+  image: node
+  commands:
+  - npm install
+  - npm test  
+
+---
+kind: pipeline
+name: backend
+
+steps:
+- name: build
+  image: node
+  commands:
+  - npm install
+  - npm test1
+
+services:
+- name: redis
+  image: redis
